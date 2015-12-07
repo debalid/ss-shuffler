@@ -18,6 +18,6 @@ def main():
         shuffler.work()
 
     notifier = Notifier(postgres, smtp_config, santa_config)
-    notifier.notify_unaware()
+    notifier.notify_unawared()
 
 main()

@@ -20,7 +20,7 @@ class Notifier(object):
             for x in emails:
                 smtp.send_message(x["message"], from_addr=self.__smtp_config["from_address"], to_addrs=x["to_address"])
 
-    def notify_unaware(self):
+    def notify_unawared(self):
         with self.__postgres.connection() as connection, connection.cursor() as curs:
             curs.execute("SELECT id, email FROM human WHERE is_santa = TRUE AND email_sent = FALSE")
 
