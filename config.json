@@ -1,0 +1,22 @@
+{
+  "smtp": {
+    "host": "smtp.gmail.com",
+    "user": "user",
+    "password": "password",
+    "port": 465,
+    "from_address": "user@gmail.com"
+  },
+  "database":
+  {
+    "host": "localhost",
+    "database": "santa",
+    "user": "santa_consumer",
+    "password": "qwerty1234",
+    "port": 5432
+  },
+  "santa":
+  {
+    "message": "Поздравляем! Теперь ты стал Сантой!",
+    "shuffle_limit": 10
+  }
+}
