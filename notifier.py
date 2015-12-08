@@ -1,5 +1,6 @@
 import ssl
 from smtplib import SMTP_SSL, SMTPException
+from jinja2 import Environment, FileSystemLoader
 
 __author__ = 'debalid'
 
@@ -12,6 +13,7 @@ class Notifier(object):
             self.__santa_config = santa_config
         else:
             raise ValueError("SMTP or Santa config are not proper.")
+        self.__jinja_environment = Environment(loader=FileSystemLoader("views"))
 
     def send(self, emails):
         ssl_context = ssl.create_default_context()
@@ -34,8 +36,11 @@ class Notifier(object):
                     if curs.rowcount == 0:
                         raise Exception("Wrong state of santa with id: " + id)
                     (name, address, post_index) = curs.fetchone()
-                    return MIMEText(self.__santa_config["message"] + "<br/>" + name + "<br/>" + address + "<br/>" +
-                                    post_index, "html")
+                    #return MIMEText(self.__santa_config["message"] + "<br/>" + name + "<br/>" + address + "<br/>" +
+                                    #post_index, "html")
+                    return MIMEText(self.__jinja_environment
+                                    .get_template("mail.html")
+                                    .render(name=name,address=address,post_index=post_index), "html")
 
                 emails = list(map(
                     lambda x: {

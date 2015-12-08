@@ -1,4 +1,5 @@
-import json, codecs
+import json
+import codecs
 from shuffler import Shuffler
 from postgres import PostgresInjection
 from notifier import Notifier
@@ -7,7 +8,7 @@ __author__ = 'debalid'
 
 
 def main():
-    config_json = json.load(codecs.open("config.json", "r", encoding="UTF-8"))
+    config_json = json.load(codecs.open("config_release.json", "r", encoding="UTF-8"))
     db_config = config_json["database"]
     smtp_config = config_json["smtp"]
     santa_config = config_json["santa"]
